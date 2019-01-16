@@ -1,0 +1,11 @@
+curl -X POST -H "Authorization: Bearer 5QQtTE0-Gz__cevFZLCaAm0yHPW5opgP9Mk60hNqMBuvhtkUiCINiypjWdbKnBRVMuRuA3bz-MfMmFCJgFg_XHYx" -H "Content-Type: application/graphql" https://api.yelp.com/v3/graphql --data '
+{
+    business(id: "garaje-san-francisco") {
+        name
+        id
+        alias
+        rating
+        url
+    }
+}'
+{"data":{"business":{"name":"Garaje","id":"tnhfDv5Il8EaGSXZGiuQGg","alias":"garaje-san-francisco","rating":4.5,"url":"https://www.yelp.com/biz/garaje-san-francisco?adjust_creative=i3u4gnM23IFPVMVxuwta_A&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=i3u4gnM23IFPVMVxuwta_A"}}}Zanes-MacBook-Pro:~ zane$
