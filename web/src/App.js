@@ -7,19 +7,7 @@ const { createApolloFetch } = require('apollo-fetch');
 
 class App extends Component {
 
-  componentDidMount() {
-
-    const fetch = createApolloFetch({
-      uri: 'https://1jzxrj179.lp.gql.zone/graphql',
-    });
-
-    fetch({
-      query: '{ posts { title }}',
-    }).then(res => {
-      console.log(res.data);
-    });
-
-  }
+  
   render() {
     return (
       <div className="App">
