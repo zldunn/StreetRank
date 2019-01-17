@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, request
 import requests
+from firebase import firebase
 from requests.utils import quote
 import json
 
@@ -10,22 +11,22 @@ headers = {
 }
 uri = 'https://api.yelp.com/v3/graphql'
 
+firebase = firebase.FirebaseApplication('https://streetrank-12e2a.firebaseio.com/')
+
 def run_query(query): # A simple function to use requests.post to make the API call. Note the json= section.
     print({"query": query})
-    request = requests.post(uri, data= query, headers=headers)
-    if request.status_code == 200:
-        return request.json()
+    _request = requests.post(uri, data= query, headers=headers)
+    if _request.status_code == 200:
+        return _request.json()
     else:
-        print(request.text  )
-        raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, query  ))
+        print(_request.text  )
+        raise Exception("Query failed to run by returning code of {}. {}".format(_request.status_code, query  ))
 
-
-# The GraphQL query (with a few aditional bits included) itself defined as a multi-line string.
 
 query = """
 {
     search(term: "coffee",
-            location: "548 Brannan StSan Francisco, CA 94107",
+            location: "%s",
             limit: 10,
             radius: 500) {
         total
@@ -37,13 +38,19 @@ query = """
 }
 """
 
-
-@app.route('/')
-def hello():
-    result = run_query(query) # Execute the query
-    remaining_rate_limit = result # Drill down the dictionary
-    print("Remaining rate limit - {}".format(remaining_rate_limit))
-    return json.dumps(result, indent=4, sort_keys=True)
+@app.route('/nearby', methods=['POST'])
+def getNearby():
+    if request.method == 'POST':
+        data = request.args.to_dict()
+        print(data)
+        print("hi")
+        address = data['address']
+        queryWithAddress = query % address
+        print(queryWithAddress)
+        result = run_query(queryWithAddress) # Execute the query
+        return json.dumps(result, indent=4, sort_keys=True)
+    else:
+        return ""
 
 
 if __name__ == '__main__':
