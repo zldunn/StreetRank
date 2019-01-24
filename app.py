@@ -45,9 +45,10 @@ def getNearby():
     fit the term type
     """
     if request.method == 'POST':
-        data = request.args.to_dict()
-        address = data['address']
-        term = data['term']
+        data = request.get_json()
+        print(data)
+        address = data.get('address', '548 Brannan St San francisco, CA')
+        term = data.get('term', 'coffee')
         queryWithAddress = query % (term, address)
         print(queryWithAddress)
         result = run_query(queryWithAddress) # Execute the query
@@ -69,7 +70,6 @@ def setCriteria():
         return json.dumps(result, indent=4, sort_keys=True)
     else:
         return "didnt go through"
-
 
 
 if __name__ == '__main__':
