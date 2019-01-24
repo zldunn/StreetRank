@@ -21,30 +21,36 @@ function fetchResults(address) {
     })
 }
 
+function printResults(resturantData) {
+  const stringData = JSON.stringify(resturantData);
+  return (
+    <p>{stringData}</p>
+  )
+}
 const baseUrl = 'http://127.0.0.1:5000/nearby';
 class Input extends Component {
 
   constructor(props) {
     super(props)
-    state = {
+    this.state = {
       query : '',
-    }
+    };
+
+    //TODO: learn more about what this binding does
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  handleChange(event){
+  handleChange(event) {
    this.setState({
      query: event.target.value
    });
-  }
+ }
 
-  handleSubmit() {
+  handleSubmit(event) {
     fetchResults(this.state.query)
+    event.preventDefault();
   }
-
-
-
-
 
   render() {
     return (
