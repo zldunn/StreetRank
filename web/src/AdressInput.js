@@ -2,25 +2,6 @@ import React, { Component } from 'react';
 
 //const { createApolloFetch } = require('apollo-fetch');
 
-//TODO: Make this the high level and remove term
-function fetchResults(address) {
-  console.log("running")
-  fetch(baseUrl, {
-    headers: {
-      "content-type": "application/json"
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      'address': address,
-      'term': 'coffee'
-    }),
-  }).then( results => {
-    return results.json()
-    }).then( data => {
-      return false
-    })
-}
-
 function printResults(resturantData) {
   const stringData = JSON.stringify(resturantData);
   return (
@@ -34,6 +15,7 @@ class Input extends Component {
     super(props)
     this.state = {
       query : '',
+      yelpData : {},
     };
 
     //TODO: learn more about what this binding does
@@ -47,13 +29,35 @@ class Input extends Component {
    });
  }
 
+ //TODO: Make this the high level and remove term
+ fetchResults(address) {
+   console.log("running")
+   fetch(baseUrl, {
+     headers: {
+       "content-type": "application/json"
+     },
+     method: 'POST',
+     body: JSON.stringify({
+       'address': address,
+       'term': 'coffee'
+     }),
+   }).then( results => {
+     return results.json()
+     }).then( data => {
+       this.setState({yelpData: data})
+     })
+ }
+
+
   handleSubmit(event) {
-    fetchResults(this.state.query)
+    this.fetchResults(this.state.query)
     event.preventDefault();
   }
 
+
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <input
           placeholder = "Enter an address!"
@@ -64,6 +68,8 @@ class Input extends Component {
           type="submit"
         />
       </form>
+      <p>{JSON.stringify(this.state.yelpData)}</p>
+      </div>
     );
   }
 }
