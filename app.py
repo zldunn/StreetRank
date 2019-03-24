@@ -2,9 +2,12 @@ from flask import Flask, request
 import requests
 from firebase import firebase
 from requests.utils import quote
+from flask_cors import CORS
+
 import json
 
 app = Flask(__name__)
+CORS(app)
 headers = {
     "Authorization": "Bearer 5QQtTE0-Gz__cevFZLCaAm0yHPW5opgP9Mk60hNqMB94SUugjXS-KgUpWE8k4yQc33yFWjsn-sFc0rksDwuvhtkUiCINiypjWdbKnBRVMuRuA3bz-MfMmFCJgFg_XHYx",
     "Content-Type": "application/graphql"
@@ -45,9 +48,10 @@ def getNearby():
     fit the term type
     """
     if request.method == 'POST':
-        data = request.args.to_dict()
-        address = data['address']
-        term = data['term']
+        data = request.get_json()
+        print(data)
+        address = data.get('address', '548 Brannan St San francisco, CA')
+        term = data.get('term', 'coffee')
         queryWithAddress = query % (term, address)
         print(queryWithAddress)
         result = run_query(queryWithAddress) # Execute the query
@@ -69,7 +73,6 @@ def setCriteria():
         return json.dumps(result, indent=4, sort_keys=True)
     else:
         return "didnt go through"
-
 
 
 if __name__ == '__main__':
