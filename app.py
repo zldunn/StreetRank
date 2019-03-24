@@ -2,9 +2,12 @@ from flask import Flask, request
 import requests
 from firebase import firebase
 from requests.utils import quote
+from flask_cors import CORS
+
 import json
 
 app = Flask(__name__)
+CORS(app)
 headers = {
     "Authorization": "Bearer 5QQtTE0-Gz__cevFZLCaAm0yHPW5opgP9Mk60hNqMB94SUugjXS-KgUpWE8k4yQc33yFWjsn-sFc0rksDwuvhtkUiCINiypjWdbKnBRVMuRuA3bz-MfMmFCJgFg_XHYx",
     "Content-Type": "application/graphql"
