@@ -36,6 +36,7 @@ query = """
         business {
             name
             rating
+            distance
         }
     }
 }

@@ -1,0 +1,87 @@
+.results {
+  margin: auto;
+  width: 50%;
+
+}
+.category {
+  background-color: #E7717D;
+  margin: auto;
+  padding: 10px;
+  align: center;
+  border: 2px ;
+  border-radius: 10px;
+  position: relative;
+  top: 15px;
+}
+
+.category-text {
+  text-align: left;
+  color: white;
+}
+
+.category-results {
+  /* border: 2px solid #C2CAD0; */
+  border-radius: 10px;
+
+}
+.results-buffer {
+  height: 15px;
+}
+
+.item {
+  height: 70px;
+  text-align: left;
+  border-bottom: 1px #C2CAD0 solid;
+  border-bottom-style: inset;
+  padding: 10px;
+}
+
+.item-details {
+  padding: 10px;
+  height: 100%;
+  display: inline-block;
+  width: 85%
+  }
+
+.item-name {
+  text-align: left;
+  margin: 0px 10px;
+  padding: 0px 10px;
+  font-weight: bold;
+  display: block;
+
+}
+
+.item-rank {
+  text-align: center;
+  color: white;
+  float:left;
+  padding: 2px;
+  margin: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background-color: #AFD275;
+}
+
+.item-rating {
+  display:block;
+  text-align: left;
+  float: left;
+  margin: 0px 10px;
+  padding: 0px 10px;
+}
+
+.miles-postfix {
+  font-size: 10px;
+  margin: 5px;
+}
+
+.distance {
+  float: right;
+  display: inline;
+}
+
+.distance-number {
+  font-weight: bold;
+}
