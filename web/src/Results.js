@@ -23,8 +23,9 @@ function getCategoryDiv(categoryName, length) {
 
 function formatDist(distInMeters)
 {
-  const distInKm = distInMeters / 1000;
-  const distInMi = distInKm / 0.62;
+  console.log(distInMeters)
+  const distInKm = distInMeters / 1000.0;
+  const distInMi = distInKm * 0.62;
   const twoDigits = distInMi.toFixed(2);
   return twoDigits;
 }
@@ -65,10 +66,10 @@ class CategoryResult extends Component {
     const category = getCategoryDiv(this.props.category, this.props.data.length);
     const list = this.getDetails(this.props);
     //TODO: can you do this functionally?
-    const buffer = this.props.data.length > 0 ? (<div className="results-buffer" />) : null;
+    const buffer = (<div className="results-buffer" />);
     return(
     <div>
-    {this.props.data.length > 0 ? (
+    {(
       <div>
         <div className="category" onClick={() => this.toggleList()}> {category} </div>
         <div className="category-results">
@@ -76,7 +77,7 @@ class CategoryResult extends Component {
             {this.state.listOpen ? list: null}
         </div>
       </div>
-    ) : null
+    )
   }
     </div>
   );
