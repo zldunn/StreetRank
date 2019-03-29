@@ -10,18 +10,22 @@ function printResults(resturantData) {
   )
 }
 
-function getCategoryDiv(categoryName) {
+function getCategoryDiv(categoryName, length) {
   return (
-    <div className="category-text">
-      {categoryName}
+    <div>
+      <span className="category-text">
+        {categoryName}
+      </span>
+      <span className="category-size">{length}</span>
     </div>
   )
 }
 
 function formatDist(distInMeters)
 {
-  const distInKm = distInMeters / 1000;
-  const distInMi = distInKm / 0.62;
+  console.log(distInMeters)
+  const distInKm = distInMeters / 1000.0;
+  const distInMi = distInKm * 0.62;
   const twoDigits = distInMi.toFixed(2);
   return twoDigits;
 }
@@ -43,6 +47,7 @@ class CategoryResult extends Component {
 
   getDetails(props){
     let counter = 1;
+    console.log(props.data);
     return (<div>{props.data.map( loc =>
       <div>
       <Item
@@ -57,15 +62,14 @@ class CategoryResult extends Component {
   }
 
   render() {
-    const categoryName = "Coffee";
 
-    const category = getCategoryDiv(categoryName);
+    const category = getCategoryDiv(this.props.category, this.props.data.length);
     const list = this.getDetails(this.props);
     //TODO: can you do this functionally?
-    const buffer = this.props.data.length > 0 ? (<div className="results-buffer" />) : null;
+    const buffer = (<div className="results-buffer" />);
     return(
     <div>
-    {this.props.data.length > 0 ? (
+    {(
       <div>
         <div className="category" onClick={() => this.toggleList()}> {category} </div>
         <div className="category-results">
@@ -73,7 +77,7 @@ class CategoryResult extends Component {
             {this.state.listOpen ? list: null}
         </div>
       </div>
-    ) : null
+    )
   }
     </div>
   );
@@ -133,7 +137,7 @@ class Results extends Component {
     const resultText = printResults(this.props.results);
     return (
       <div className="results">
-      <CategoryResult data={this.props.results} />
+      <CategoryResult data={this.props.results} category={this.props.category} />
       </div>
     );
   }

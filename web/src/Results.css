@@ -1,22 +1,31 @@
 .results {
   margin: auto;
-  width: 50%;
+  width: 100%;
 
 }
 .category {
-  background-color: #E7717D;
+  background-color: #84ceeb;
   margin: auto;
   padding: 10px;
-  align: center;
   border: 2px ;
   border-radius: 10px;
   position: relative;
   top: 15px;
+  height: 30px;
 }
 
 .category-text {
-  text-align: left;
+  float: left;
   color: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.category-size {
+  float: right;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .category-results {
@@ -31,7 +40,7 @@
 .item {
   height: 70px;
   text-align: left;
-  border-bottom: 1px #C2CAD0 solid;
+  border-bottom: 1px #84ceeb solid;
   border-bottom-style: inset;
   padding: 10px;
 }
@@ -61,7 +70,7 @@
   width: 20px;
   height: 20px;
   border-radius: 2px;
-  background-color: #AFD275;
+  background-color: #5ab9ea;
 }
 
 .item-rating {
