@@ -10,10 +10,13 @@ function printResults(resturantData) {
   )
 }
 
-function getCategoryDiv(categoryName) {
+function getCategoryDiv(categoryName, length) {
   return (
-    <div className="category-text">
-      {categoryName}
+    <div>
+      <span className="category-text">
+        {categoryName}
+      </span>
+      <span className="category-size">{length}</span>
     </div>
   )
 }
@@ -43,6 +46,7 @@ class CategoryResult extends Component {
 
   getDetails(props){
     let counter = 1;
+    console.log(props.data);
     return (<div>{props.data.map( loc =>
       <div>
       <Item
@@ -57,9 +61,8 @@ class CategoryResult extends Component {
   }
 
   render() {
-    const categoryName = "Coffee";
 
-    const category = getCategoryDiv(categoryName);
+    const category = getCategoryDiv(this.props.category, this.props.data.length);
     const list = this.getDetails(this.props);
     //TODO: can you do this functionally?
     const buffer = this.props.data.length > 0 ? (<div className="results-buffer" />) : null;
@@ -133,7 +136,7 @@ class Results extends Component {
     const resultText = printResults(this.props.results);
     return (
       <div className="results">
-      <CategoryResult data={this.props.results} />
+      <CategoryResult data={this.props.results} category={this.props.category} />
       </div>
     );
   }

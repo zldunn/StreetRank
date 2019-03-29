@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './AdressInput.css';
 
 //const { createApolloFetch } = require('apollo-fetch');
 
@@ -25,22 +26,28 @@ class Input extends Component {
 
 
   handleSubmit(event) {
-    this.props.fetch(this.props.query);
+    this.props.categories.map( category =>
+      this.props.fetch(this.props.query, category)
+    );
     event.preventDefault();
   }
 
   render() {
     return (
       <div>
-      <form onSubmit={this.handleSubmit}>
+      <form id="search-bar" onSubmit={this.handleSubmit}>
+      <div >
         <input
+        className="search"
           placeholder = "Enter an address!"
           value={this.props.query}
             onChange={this.handleChange}
         />
         <input
+        className="search-button"
           type="submit"
         />
+        </div>
       </form>
       </div>
     );

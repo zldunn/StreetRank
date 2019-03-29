@@ -17,12 +17,10 @@ uri = 'https://api.yelp.com/v3/graphql'
 firebase = firebase.FirebaseApplication('https://streetrank-12e2a.firebaseio.com/')
 
 def run_query(query): # A simple function to use requests.post to make the API call. Note the json= section.
-    print({"query": query})
     _request = requests.post(uri, data= query, headers=headers)
     if _request.status_code == 200:
         return _request.json()
     else:
-        print(_request.text  )
         raise Exception("Query failed to run by returning code of {}. {}".format(_request.status_code, query  ))
 
 
@@ -50,11 +48,9 @@ def getNearby():
     """
     if request.method == 'POST':
         data = request.get_json()
-        print(data)
         address = data.get('address', '548 Brannan St San francisco, CA')
         term = data.get('term', 'coffee')
         queryWithAddress = query % (term, address)
-        print(queryWithAddress)
         result = run_query(queryWithAddress) # Execute the query
         return json.dumps(result, indent=4, sort_keys=True)
     else:
