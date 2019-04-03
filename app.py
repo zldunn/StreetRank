@@ -3,13 +3,13 @@ import requests
 from firebase import firebase
 from requests.utils import quote
 from flask_cors import CORS
-
+from config import config;
 import json
 
 app = Flask(__name__)
 CORS(app)
 headers = {
-    "Authorization": "Bearer 5QQtTE0-Gz__cevFZLCaAm0yHPW5opgP9Mk60hNqMB94SUugjXS-KgUpWE8k4yQc33yFWjsn-sFc0rksDwuvhtkUiCINiypjWdbKnBRVMuRuA3bz-MfMmFCJgFg_XHYx",
+    "Authorization": config["YELP_KEY"],
     "Content-Type": "application/graphql"
 }
 uri = 'https://api.yelp.com/v3/graphql'
